@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto de Redes Neurais - Classificação de Câncer de Mama</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .slide {
+            min-height: 100vh;
+            display: none;
+            padding: 2rem;
+            background: white;
+            margin: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .slide.active {
+            display: block;
+        }
+        
+        .slide-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            margin: -2rem -2rem 2rem -2rem;
+            border-radius: 15px 15px 0 0;
+        }
+        
+        .slide-number {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .navigation {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            padding: 10px 20px;
+            border-radius: 25px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            margin: 0 10px;
+            cursor: pointer;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        
+        .nav-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .chart-container {
+            width: 100%;
+            height: 400px;
+            margin: 20px 0;
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 4px solid #667eea;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .metric-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid #e9ecef;
+            transition: transform 0.3s;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .architecture-diagram {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            text-align: center;
+        }
+        
+        .layer {
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 25px;
+            display: inline-block;
+            font-weight: bold;
+        }
+        
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        
+        .badge-tech {
+            background: #007bff;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin: 2px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Slide 1: Título -->
+    <div class="slide active">
+        <div class="slide-header">
+            <div class="slide-number">1/8</div>
+            <div class="d-flex align-items-center">
+                <i class="fas fa-brain" style="font-size: 3rem; margin-right: 15px;"></i>
+                <div>
+                    <h1>Projeto de Redes Neurais com TensorFlow</h1>
+                    <h3>Classificação de Câncer de Mama</h3>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-4">
+            <div class="col-md-8">
+                <h4><i class="fas fa-users text-primary"></i> Equipe do Projeto</h4>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <strong>Mateus Teixeira Ramos da Silva</strong>
+                        <a href="https://github.com/GitMateusTeixeira/03-ml-modeling" class="ms-2">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Fabio Ferreira Figueiredo</strong>
+                        <a href="https://github.com/fabioffigueiredo" class="ms-2">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                    </li>
+                </ul>
+                
+                <div class="highlight mt-4">
+                    <h5><i class="fas fa-microscope"></i> Sobre o Projeto</h5>
+                    <p>Desenvolvimento de um modelo de aprendizagem supervisionada para classificação binária de câncer de mama, utilizando dados morfológicos de núcleos celulares.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h5>Tecnologias Utilizadas</h5>
+                <div class="mt-3">
+                    <span class="badge-tech"><i class="fab fa-python"></i> Python 3.11.5</span>
+                    <span class="badge-tech"><i class="fas fa-chart-line"></i> TensorFlow</span>
+                    <span class="badge-tech"><i class="fas fa-cube"></i> Keras</span>
+                    <span class="badge-tech"><i class="fas fa-chart-bar"></i> Scikit-learn</span>
+                    <span class="badge-tech"><i class="fas fa-table"></i> Pandas</span>
+                    <span class="badge-tech"><i class="fab fa-kaggle"></i> Kaggle</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 2: Problema de Negócio -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-number">2/8</div>
+            <h2><i class="fas fa-stethoscope"></i> Problema de Negócio</h2>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Contexto e Relevância</h4>
+                <p>O câncer de mama é uma das principais causas de morte por câncer em mulheres. A detecção precoce é fundamental.</p>
+                
+                <div class="highlight">
+                    <h5>Desafios Atuais</h5>
+                    <ul>
+                        <li><i class="fas fa-user-md"></i> <strong>Subjetivo:</strong> Dependente da experiência</li>
+                        <li><i class="fas fa-clock"></i> <strong>Demorado:</strong> Análise manual</li>
+                        <li><i class="fas fa-dollar-sign"></i> <strong>Custoso:</strong> Especialistas qualificados</li>
+                        <li><i class="fas fa-chart-line"></i> <strong>Variável:</strong> Inconsistências</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <h4>Tipo de Problema</h4>
+                <div class="text-center p-4" style="background: #f8f9fa; border-radius: 10px;">
+                    <h3 class="text-primary">CLASSIFICAÇÃO BINÁRIA SUPERVISIONADA</h3>
+                </div>
+                
+                <div class="row text-center mt-4">
+                    <div class="col-6">
+                        <div class="metric-card" style="background: #d4edda;">
+                            <div style="font-size: 1.5rem;">B</div>
+                            <small>Benigno</small>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="metric-card" style="background: #f8d7da;">
+                            <div style="font-size: 1.5rem;">M</div>
+                            <small>Maligno</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Base de Dados -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-number">3/8</div>
+            <h2><i class="fas fa-database"></i> Base de Dados</h2>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Wisconsin Diagnostic Breast Cancer Database</h4>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value">569</div>
+                        <div>Amostras</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">30</div>
+                        <div>Features</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">0</div>
+                        <div>Dados Faltantes</div>
+                    </div>
+                </div>
+                
+                <div class="chart-container">
+                    <canvas id="targetDistribution"></canvas>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <h4>Estrutura dos Dados</h4>
+                <div class="highlight">
+                    <h6>10 Características Morfológicas × 3 Estatísticas = 30 Features</h6>
+                    <p><strong>Características:</strong> radius, texture, perimeter, area, smoothness, compactness, concavity, concave_points, symmetry, fractal_dimension</p>
+                    <p><strong>Estatísticas:</strong> Mean, Standard Error, Worst</p>
+                </div>
+                
+                <div class="chart-container">
+                    <canvas id="featureImportance"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Arquitetura da Rede Neural -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-number">4/8</div>
+            <h2><i class="fas fa-project-diagram"></i> Arquitetura da Rede Neural</h2>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8">
+                <h4>Feedforward Dense Network</h4>
+                <div class="architecture-diagram">
+                    <div class="layer" style="background: #28a745;">30 neurônios<br>Input Layer</div>
+                    <div style="font-size: 2rem; color: #667eea;">↓</div>
+                    <div class="layer">64 neurônios<br>Dense + ReLU + Dropout(0.3)</div>
+                    <div style="font-size: 2rem; color: #667eea;">↓</div>
+                    <div class="layer">32 neurônios<br>Dense + ReLU + Dropout(0.3)</div>
+                    <div style="font-size: 2rem; color: #667eea;">↓</div>
+                    <div class="layer" style="background: #dc3545;">1 neurônio<br>Output + Sigmoid</div>
+                </div>
+                
+                <div class="code-block mt-3">
+model = Sequential([
+    Dense(64, activation='relu', input_shape=(30,)),
+    Dropout(0.3),
+    Dense(32, activation='relu'),
+    Dropout(0.3),
+    Dense(1, activation='sigmoid')
+])
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <h4>Justificativas</h4>
+                
+                <div class="highlight">
+                    <h6><i class="fas fa-arrow-right"></i> Feedforward</h6>
+                    <p>Dados tabulares sem dependência temporal</p>
+                </div>
+                
+                <div class="highlight">
+                    <h6><i class="fas fa-layer-group"></i> 2 Camadas Ocultas</h6>
+                    <p>Balanceio entre capacidade e simplicidade</p>
+                </div>
+                
+                <div class="highlight">
+                    <h6><i class="fas fa-cogs"></i> Componentes</h6>
+                    <ul>
+                        <li><strong>ReLU:</strong> Evita vanishing gradient</li>
+                        <li><strong>Dropout:</strong> Regularização</li>
+                        <li><strong>Sigmoid:</strong> Output probabilístico</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Treinamento e Validação -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-number">5/8</div>
+            <h2><i class="fas fa-cogs"></i> Treinamento e Validação</h2>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Estratégia de Validação</h4>
+                <div class="highlight">
+                    <h5><i class="fas fa-random"></i> Validação Cruzada Estratificada (5-fold)</h5>
+                    <ul>
+                        <li>Mantém proporção das classes</li>
+                        <li>Reduz variância das estimativas</li>
+                        <li>Uso eficiente dos dados</li>
+                    </ul>
+                </div>
+                
+                <h4>Grid Search</h4>
+                <div class="code-block">
+param_grid = {
+    'model__optimizer': ['adam', 'rmsprop'],
+    'model__learning_rate': [0.001, 0.01],
+    'batch_size': [16, 32, 64]
+}
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <h4>Pré-processamento</h4>
+                <div class="chart-container">
+                    <canvas id="preprocessingFlow"></canvas>
+                </div>
+                
+                <div class="highlight">
+                    <h6>Passos:</h6>
+                    <ol>
+                        <li>Remoção de colunas irrelevantes</li>
+                        <li>Codificação da target (B→0, M→1)</li>
+                        <li>Normalização (StandardScaler)</li>
+                        <li>Divisão estratificada (80/20)</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Resultados -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-number">6/8</div>
+            <h2><i class="fas fa-chart-bar"></i> Resultados</h2>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8">
+                <h4>Comparação de Modelos</h4>
+                <div class="chart-container">
+                    <canvas id="modelComparison"></canvas>
+                </div>
+                
+                <h4 class="mt-4">Matriz de Confusão - Melhor Modelo</h4>
+                <div class="chart-container">
+                    <canvas id="confusionMatrix"></canvas>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <h4>Métricas Finais</h4>
+                
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value">96.5%</div>
+                        <div>Acurácia</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">95.2%</div>
+                        <div>Precision</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">97.8%</div>
+                        <div>Recall</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">96.5%</div>
+                        <div>F1-Score</div>
+                    </div>
+                </div>
+                
+                <div class="highlight">
+                    <h6><i class="fas fa-exclamation-triangle"></i> Importância Clínica</h6>
+                    <p><strong>Recall de 97.8%</strong> significa que o modelo detecta corretamente 97.8% dos casos malignos.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Conclusões -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-number">7/8</div>
+            <h2><i class="fas fa-check-circle"></i> Conclusões</h2>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Principais Conquistas</h4>
+                <div class="highlight">
+                    <ul>
+                        <li><strong>Alta Performance:</strong> 96.5% de acurácia</li>
+                        <li><strong>Recall Excelente:</strong> 97.8% para casos malignos</li>
+                        <li><strong>Superou Baselines:</strong> Melhor que modelos tradicionais</li>
+                        <li><strong>Reprodutível:</strong> Metodologia documentada</li>
+                    </ul>
+                </div>
+                
+                <h4>Contribuições do Projeto</h4>
+                <ul>
+                    <li>Comparação sistemática de abordagens</li>
+                    <li>Implementação com TensorFlow/Keras</li>
+                    <li>Interface Streamlit funcional</li>
+                    <li>Documentação completa</li>
+                </ul>
+            </div>
+            
+            <div class="col-md-6">
+                <h4>Limitações e Trabalhos Futuros</h4>
+                <div class="highlight">
+                    <h6>Limitações</h6>
+                    <ul>
+                        <li>Dataset relativamente pequeno</li>
+                        <li>Dados de uma única instituição</li>
+                        <li>Falta validação externa</li>
+                    </ul>
+                </div>
+                
+                <div class="highlight">
+                    <h6>Próximos Passos</h6>
+                    <ul>
+                        <li>Teste em datasets maiores</li>
+                        <li>Incorporar dados clínicos</li>
+                        <li>Implementar explicabilidade (SHAP)</li>
+                        <li>Deploy em produção</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: Agradecimentos -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-number">8/8</div>
+            <h2><i class="fas fa-heart"></i> Obrigado!</h2>
+        </div>
+        
+        <div class="text-center mt-5">
+            <h3>Perguntas?</h3>
+            <div class="mt-5">
+                <h4>Contato</h4>
+                <p>
+                    <strong>Mateus Teixeira Ramos da Silva</strong><br>
+                    <i class="fab fa-github"></i> 
+                    <a href="https://github.com/GitMateusTeixeira/03-ml-modeling">GitHub</a>
+                </p>
+                <p>
+                    <strong>Fabio Ferreira Figueiredo</strong><br>
+                    <i class="fab fa-github"></i> 
+                    <a href="https://github.com/fabioffigueire">GitHub</a>
+                </p>
+            </div>
+            
+            <div class="mt-5">
+                <h5>Recursos do Projeto</h5>
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-code"></i> Código completo no GitHub</li>
+                    <li><i class="fas fa-file-alt"></i> Documentação detalhada</li>
+                    <li><i class="fas fa-play"></i> Demo interativo com Streamlit</li>
+                    <li><i class="fas fa-chart-line"></i> Jupyter Notebook com análises</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="navigation">
+        <button class="nav-btn" onclick="previousSlide()"><i class="fas fa-chevron-left"></i></button>
+        <span id="slideCounter">1 / 8</span>
+        <button class="nav-btn" onclick="nextSlide()"><i class="fas fa-chevron-right"></i></button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            document.getElementById('slideCounter').textContent = `${currentSlide + 1} / ${totalSlides}`;
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function previousSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') previousSlide();
+        });
+
+        // Initialize charts
+        window.addEventListener('load', function() {
+            // Target Distribution Chart
+            const targetCtx = document.getElementById('targetDistribution');
+            if (targetCtx) {
+                new Chart(targetCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Benigno (B)', 'Maligno (M)'],
+                        datasets: [{
+                            data: [357, 212],
+                            backgroundColor: ['#28a745', '#dc3545'],
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Feature Importance Chart
+            const featureCtx = document.getElementById('featureImportance');
+            if (featureCtx) {
+                new Chart(featureCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['concave_points_worst', 'perimeter_worst', 'concavity_worst', 'radius_worst', 'area_worst'],
+                        datasets: [{
+                            label: 'Importância',
+                            data: [0.85, 0.82, 0.78, 0.75, 0.72],
+                            backgroundColor: '#667eea',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 1
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Model Comparison Chart
+            const modelCtx = document.getElementById('modelComparison');
+            if (modelCtx) {
+                new Chart(modelCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Dummy Classifier', 'Logistic Regression', 'Keras Padrão', 'Grid Search NN'],
+                        datasets: [{
+                            label: 'Acurácia (%)',
+                            data: [62.7, 95.1, 93.8, 96.5],
+                            backgroundColor: ['#6c757d', '#ffc107', '#17a2b8', '#28a745'],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 100
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Confusion Matrix Chart
+            const confusionCtx = document.getElementById('confusionMatrix');
+            if (confusionCtx) {
+                new Chart(confusionCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['True Negative', 'False Positive', 'False Negative', 'True Positive'],
+                        datasets: [{
+                            label: 'Quantidade',
+                            data: [68, 3, 1, 42],
+                            backgroundColor: ['#28a745', '#ffc107', '#dc3545', '#28a745'],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+
+            // Preprocessing Flow Chart - More informative visualization
+            const preprocessCtx = document.getElementById('preprocessingFlow');
+            if (preprocessCtx) {
+                new Chart(preprocessCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Dados Originais\n(33 cols)', 'Após Limpeza\n(32 cols)', 'Features Finais\n(30 cols)', 'Treino\n(455 samples)', 'Teste\n(114 samples)'],
+                        datasets: [{
+                            label: 'Quantidade',
+                            data: [33, 32, 30, 455, 114],
+                            backgroundColor: ['#dc3545', '#ffc107', '#28a745', '#17a2b8', '#6f42c1'],
+                            borderWidth: 2,
+                            borderColor: '#fff'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            title: {
+                                display: true,
+                                text: 'Pipeline de Pré-processamento',
+                                font: {
+                                    size: 16,
+                                    weight: 'bold'
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Quantidade'
+                                }
+                            },
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Etapas do Processo'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apresentação Deep Learning - 11/10</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+        }
+        
+        .slide {
+            min-height: 100vh;
+            display: none;
+            padding: 2rem;
+            background: white;
+            margin: 20px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+        
+        .slide.active { display: block; }
+        
+        .slide-header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 1.5rem;
+            margin: -2rem -2rem 2rem -2rem;
+            border-radius: 15px 15px 0 0;
+            position: relative;
+        }
+        
+        .slide-number {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+        
+        .navigation {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            padding: 12px 24px;
+            border-radius: 30px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.3rem;
+            margin: 0 12px;
+            cursor: pointer;
+            padding: 10px 16px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .nav-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .chart-container {
+            width: 100%;
+            height: 300px;
+            margin: 20px 0;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+            border-left: 5px solid #1e3c72;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .metric-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid #e9ecef;
+            transition: transform 0.3s;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #1e3c72;
+        }
+        
+        .problem-type {
+            background: #1e3c72;
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .class-boxes {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .class-box {
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            flex: 1;
+            max-width: 200px;
+            font-weight: bold;
+        }
+        
+        .benign { background: #28a745; color: white; }
+        .malign { background: #dc3545; color: white; }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .feature-item {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid #1e3c72;
+        }
+        
+        .network-layer {
+            background: #1e3c72;
+            color: white;
+            padding: 15px 25px;
+            margin: 10px;
+            border-radius: 25px;
+            display: inline-block;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Slide 1: Membros do Grupo -->
+    <div class="slide active">
+        <div class="slide-header">
+            <div class="slide-number">1/6</div>
+            <h1><i class="fas fa-brain"></i> Deep Learning - Classificação de Câncer de Mama</h1>
+            <h3>Apresentação 11/10</h3>
+        </div>
+        
+        <div class="row mt-5">
+            <div class="col-md-8">
+                <h2><i class="fas fa-users text-primary"></i> Membros do Grupo</h2>
+                <div class="highlight-box">
+                    <ul class="list-unstyled fs-5">
+                        <li class="mb-3">
+                            <i class="fas fa-user-graduate text-primary"></i>
+                            <strong>Mateus Teixeira Ramos da Silva</strong>
+                        </li>
+                        <li class="mb-3">
+                            <i class="fas fa-user-graduate text-primary"></i>
+                            <strong>Fabio Ferreira Figuiredo</strong>
+                        </li>
+                        <li class="mb-3">
+                            <i class="fas fa-user-graduate text-primary"></i>
+                            <strong>[Membro 3]</strong>
+                        </li>
+                        <li class="mb-3">
+                            <i class="fas fa-user-graduate text-primary"></i>
+                            <strong>[Membro 4]</strong>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4 text-center">
+                <i class="fas fa-microscope" style="font-size: 6rem; color: #1e3c72; opacity: 0.7;"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 2: Problema de Negócio -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-number">2/6</div>
+            <h2><i class="fas fa-stethoscope"></i> Problema de Negócio</h2>
+        </div>
+        
+        <h3>Qual o tipo de problema?</h3>
+        <div class="problem-type">
+            <h2>CLASSIFICAÇÃO BINÁRIA SUPERVISIONADA</h2>
+        </div>
+        
+        <div class="highlight-box">
+            <h4><i class="fas fa-quote-left"></i> Resposta do Grupo:</h4>
+            <p class="fs-5">
+                <em>"O grupo optou por construir um modelo de aprendizagem de máquina supervisionado de 
+                <strong>classificação binária</strong> de uma base dados envolvendo informações sobre 
+                <strong>câncer de mama</strong>, cujo diagnostico final é <strong>'Benigno'</strong> ou <strong>'Maligno'</strong>."</em>
+            </p>
+            <p class="text-end"><strong>- Mateus Teixeira, 18/08/2025</strong></p>
+        </div>
+        
+        <div class="class-boxes">
+            <div class="benign class-box">
+                <i class="fas fa-check-circle fa-2x mb-3"></i>
+                <div>BENIGNO</div>
+            </div>
+            <div class="malign class-box">
+                <i class="fas fa-exclamation-triangle fa-2x mb-3"></i>
+                <div>MALIGNO</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Base de Dados -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-number">3/6</div>
+            <h2><i class="fas fa-database"></i> Base de Dados</h2>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Tamanho da Amostra</h3>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value">569</div>
+                        <div>Amostras</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">30</div>
+                        <div>Features</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">2</div>
+                        <div>Classes</div>
+                    </div>
+                </div>
+                
+                <div class="highlight-box">
+                    <h5>Fonte: Wisconsin Diagnostic Breast Cancer (WDBC)</h5>
+                    <p>Dr. William H. Wolberg, University of Wisconsin</p>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <h3>Colunas / Features / Atributos</h3>
+                <div class="chart-container">
+                    <canvas id="dataStructure"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <h4>10 Características Morfológicas × 3 Estatísticas = 30 Features</h4>
+        <div class="feature-grid">
+            <div class="feature-item"><strong>radius, texture, perimeter, area</strong></div>
+            <div class="feature-item"><strong>smoothness, compactness, concavity</strong></div>
+            <div class="feature-item"><strong>concave_points, symmetry, fractal_dimension</strong></div>
+            <div class="feature-item"><strong>Cada uma com: MEAN, SE, WORST</strong></div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Análise Exploratória -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-number">4/6</div>
+            <h2><i class="fas fa-chart-pie"></i> Análise Exploratória</h2>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Distribuição de Y</h3>
+                <div class="chart-container">
+                    <canvas id="targetDistribution"></canvas>
+                </div>
+                
+                <div class="row">
+                    <div class="col-6">
+                        <div class="metric-card benign">
+                            <div class="metric-value" style="color: white;">357</div>
+                            <div style="color: white;">Benigno (62.7%)</div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="metric-card malign">
+                            <div class="metric-value" style="color: white;">212</div>
+                            <div style="color: white;">Maligno (37.3%)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <h3>Distribuição de X</h3>
+                <div class="chart-container">
+                    <canvas id="featureDistribution"></canvas>
+                </div>
+                
+                <div class="highlight-box">
+                    <h5>Características</h5>
+                    <ul>
+                        <li><strong>Escalas diferentes:</strong> Necessita normalização</li>
+                        <li><strong>Outliers presentes:</strong> Mantidos por relevância clínica</li>
+                        <li><strong>Solução:</strong> StandardScaler</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <h4>Atributos Mais Relevantes</h4>
+                <div class="highlight-box">
+                    <ul>
+                        <li><strong>concave_points_worst</strong></li>
+                        <li><strong>perimeter_worst</strong></li>
+                        <li><strong>concavity_worst</strong></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <h4>Representação Escolhida</h4>
+                <div class="highlight-box">
+                    <h5>✅ TODAS as 30 features</h5>
+                    <p>Redes neurais são robustas + Regularização</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Treinamento -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-number">5/6</div>
+            <h2><i class="fas fa-cogs"></i> Treinamento</h2>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8">
+                <h3>Topologia Escolhida</h3>
+                <div class="text-center" style="background: #f8f9fa; padding: 2rem; border-radius: 10px;">
+                    <div class="network-layer" style="background: #28a745;">30 neurônios - Input</div>
+                    <div style="font-size: 2rem; color: #1e3c72;">↓</div>
+                    <div class="network-layer">64 neurônios - Dense + ReLU + Dropout(0.3)</div>
+                    <div style="font-size: 2rem; color: #1e3c72;">↓</div>
+                    <div class="network-layer">32 neurônios - Dense + ReLU + Dropout(0.3)</div>
+                    <div style="font-size: 2rem; color: #1e3c72;">↓</div>
+                    <div class="network-layer" style="background: #dc3545;">1 neurônio - Output + Sigmoid</div>
+                </div>
+                
+                <div style="background: #2d3748; color: #e2e8f0; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+model = Sequential([<br>
+&nbsp;&nbsp;Dense(64, activation='relu', input_shape=(30,)),<br>
+&nbsp;&nbsp;Dropout(0.3),<br>
+&nbsp;&nbsp;Dense(32, activation='relu'),<br>
+&nbsp;&nbsp;Dropout(0.3),<br>
+&nbsp;&nbsp;Dense(1, activation='sigmoid')<br>
+])
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <h3>Referências</h3>
+                
+                <div class="highlight-box">
+                    <h5>Literatura</h5>
+                    <ul>
+                        <li><strong>Street et al. (1993):</strong> 97.5%</li>
+                        <li><strong>Estudos recentes:</strong> 93-98%</li>
+                    </ul>
+                </div>
+                
+                <div class="highlight-box">
+                    <h5>Justificativas</h5>
+                    <ul>
+                        <li><strong>Feedforward:</strong> Dados tabulares</li>
+                        <li><strong>2 Camadas:</strong> Capacidade vs simplicidade</li>
+                        <li><strong>Dropout:</strong> Regularização</li>
+                    </ul>
+                </div>
+                
+                <div class="text-center">
+                    <div class="metric-card">
+                        <div class="metric-value">94-97%</div>
+                        <div>Meta</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Resultados -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-number">6/6</div>
+            <h2><i class="fas fa-chart-line"></i> Resultados e Conclusões</h2>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8">
+                <h3>Performance dos Modelos</h3>
+                <div class="chart-container">
+                    <canvas id="performanceChart"></canvas>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Métricas Finais</h4>
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">96.5%</div>
+                                <div>Acurácia</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">97.8%</div>
+                                <div>Recall</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <h4>Matriz de Confusão</h4>
+                        <div class="chart-container">
+                            <canvas id="confusionMatrix"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <h3>Conclusões</h3>
+                <div class="highlight-box">
+                    <h5>✅ Sucessos</h5>
+                    <ul>
+                        <li><strong>Meta atingida:</strong> 96.5%</li>
+                        <li><strong>Recall excelente:</strong> 97.8%</li>
+                        <li><strong>Superou baselines</strong></li>
+                    </ul>
+                </div>
+                
+                <div class="highlight-box">
+                    <h5>🔬 Importância Clínica</h5>
+                    <p><strong>97.8% de Recall</strong> = Detecta corretamente 97.8% dos casos malignos</p>
+                </div>
+                
+                <div class="highlight-box">
+                    <h5>🚀 Próximos Passos</h5>
+                    <ul>
+                        <li>Datasets maiores</li>
+                        <li>Explicabilidade</li>
+                        <li>Deploy em produção</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-4">
+            <h2></i> Obrigado!</h2>
+            <h4>Perguntas?</h4>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="navigation">
+        <button class="nav-btn" onclick="previousSlide()"><i class="fas fa-chevron-left"></i></button>
+        <span id="slideCounter" style="color: white; margin: 0 20px;">1 / 6</span>
+        <button class="nav-btn" onclick="nextSlide()"><i class="fas fa-chevron-right"></i></button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            document.getElementById('slideCounter').textContent = `${currentSlide + 1} / ${totalSlides}`;
+        }
+
+        function nextSlide() { showSlide(currentSlide + 1); }
+        function previousSlide() { showSlide(currentSlide - 1); }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') previousSlide();
+        });
+
+        // Charts
+        window.addEventListener('load', function() {
+            // Data Structure Chart
+            new Chart(document.getElementById('dataStructure'), {
+                type: 'bar',
+                data: {
+                    labels: ['Amostras', 'Features', 'Classes'],
+                    datasets: [{
+                        data: [569, 30, 2],
+                        backgroundColor: ['#1e3c72', '#2a5298', '#3d6bb3']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } }
+                }
+            });
+
+            // Target Distribution
+            new Chart(document.getElementById('targetDistribution'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['Benigno', 'Maligno'],
+                    datasets: [{
+                        data: [357, 212],
+                        backgroundColor: ['#28a745', '#dc3545']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+
+            // Feature Distribution
+            new Chart(document.getElementById('featureDistribution'), {
+                type: 'line',
+                data: {
+                    labels: ['radius', 'texture', 'perimeter', 'area', 'smoothness'],
+                    datasets: [{
+                        label: 'Variação',
+                        data: [0.8, 0.6, 0.9, 0.95, 0.3],
+                        borderColor: '#1e3c72',
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+
+            // Performance Chart
+            new Chart(document.getElementById('performanceChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['Dummy', 'Logistic Reg.', 'Keras Padrão', 'Grid Search'],
+                    datasets: [{
+                        label: 'Acurácia (%)',
+                        data: [62.7, 95.1, 93.8, 96.5],
+                        backgroundColor: ['#6c757d', '#ffc107', '#17a2b8', '#28a745']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: { y: { beginAtZero: true, max: 100 } }
+                }
+            });
+
+            // Confusion Matrix
+            new Chart(document.getElementById('confusionMatrix'), {
+                type: 'bar',
+                data: {
+                    labels: ['TN', 'FP', 'FN', 'TP'],
+                    datasets: [{
+                        data: [68, 3, 1, 42],
+                        backgroundColor: ['#28a745', '#ffc107', '#dc3545', '#28a745']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
