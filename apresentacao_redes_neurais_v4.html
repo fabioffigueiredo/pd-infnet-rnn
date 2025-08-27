@@ -757,89 +757,7 @@
 
         </section>
 
-        <!-- Slide 6: Arquitetura da Rede Neural -->
-        <section class="slide">
-            <h1 style="font-size: 2rem; margin-bottom: 1rem;"><i class="fas fa-sitemap icon"></i>Arquitetura da Rede Neural</h1>
-            
-            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.25rem; margin: 0.75rem 0; align-items: start;">
-                <!-- Coluna Esquerda: Arquitetura da Rede Neural -->
-                <div class="highlight-card" style="text-align: center; padding: 1.25rem; min-height: 280px; display: flex; flex-direction: column; justify-content: center;">
-                    <h3 style="margin-bottom: 0.75rem; font-size: 1.1rem;"><i class="fas fa-brain icon"></i>Rede Neural Feedforward Densa</h3>
-                    <div style="background: rgba(255, 255, 255, 0.8); border-radius: 12px; padding: 1.5rem; margin: 0.75rem 0; font-family: 'JetBrains Mono', monospace; font-size: 1rem; line-height: 1.8; color: var(--text-primary); border: 2px solid rgba(74, 144, 226, 0.1); flex: 1; display: flex; flex-direction: column; justify-content: center;">
-                        Camada de Entrada: 30 neurônios (features)<br>
-                        ↓<br>
-                        Camada Oculta 1: 64 neurônios + ReLU + Dropout(0.3)<br>
-                        ↓<br>
-                        Camada Oculta 2: 32 neurônios + ReLU + Dropout(0.3)<br>
-                        ↓<br>
-                        Camada de Saída: 1 neurônio + Sigmoid
-                    </div>
-                </div>
-                
-                <!-- Coluna Direita: Cards de Estatísticas (empilhados) -->
-                <div style="display: flex; flex-direction: column; gap: 0.75rem; height: 100%; justify-content: space-between;">
-                    <div class="card stat-card" style="padding: 1rem; flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 60px;">
-                        <span class="stat-number" style="margin-bottom: 0.5rem;">2</span>
-                        <div class="stat-label" style="margin-bottom: 0.25rem;">Camadas Ocultas</div>
-                        <p style="font-size: 1rem; margin: 0; text-align: center;">Balanceio capacidade/simplicidade</p>
-                    </div>
-                    <div class="card stat-card" style="padding: 1rem; flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 60px;">
-                        <span class="stat-number" style="margin-bottom: 0.5rem;">64→32</span>
-                        <div class="stat-label" style="margin-bottom: 0.25rem;">Neurônios</div>
-                        <p style="font-size: 1rem; margin: 0; text-align: center;">Redução gradual</p>
-                    </div>
-                    <div class="card stat-card" style="padding: 1rem; flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 60px;">
-                        <span class="stat-number" style="margin-bottom: 0.5rem;">30%</span>
-                        <div class="stat-label" style="margin-bottom: 0.25rem;">Dropout</div>
-                        <p style="font-size: 1rem; margin: 0; text-align: center;">Regularização</p>
-                    </div>
-                    <div class="card stat-card" style="padding: 1rem; flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 60px;">
-                        <span class="stat-number" style="margin-bottom: 0.5rem;">ReLU</span>
-                        <div class="stat-label" style="margin-bottom: 0.25rem;">Ativação</div>
-                        <p style="font-size: 1rem; margin: 0; text-align: center;">Não saturação</p>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Layout 2x2 harmonioso para as 4 divs explicativas -->
-            <div style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 1rem; margin: 1.25rem 0; align-items: stretch;">
-                <!-- Primeira linha -->
-                <div class="card" style="padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 140px; border-left: 4px solid var(--primary);">
-                    <h4 style="margin-bottom: 0.75rem; color: var(--primary); font-size: 1rem;"><i class="fas fa-arrow-right"></i> Por que Feedforward?</h4>
-                    <ul style="flex: 1; display: flex; flex-direction: column; justify-content: center; margin: 0; padding-left: 1.2rem;">
-                        <li style="margin-bottom: 0.4rem; font-size: 0.9rem;">Dados tabulares sem dependência sequencial</li>
-                        <li style="margin-bottom: 0.4rem; font-size: 0.9rem;">Estrutura simples e interpretável</li>
-                        <li style="font-size: 0.9rem;">Adequada para classificação binária</li>
-                    </ul>
-                </div>
-                <div class="card" style="padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 140px; border-left: 4px solid var(--success);">
-                    <h4 style="margin-bottom: 0.75rem; color: var(--success); font-size: 1rem;"><i class="fas fa-layer-group"></i> Por que 2 Camadas Ocultas?</h4>
-                    <ul style="flex: 1; display: flex; flex-direction: column; justify-content: center; margin: 0; padding-left: 1.2rem;">
-                        <li style="margin-bottom: 0.4rem; font-size: 0.9rem;">1 camada: Insuficiente para padrões complexos</li>
-                        <li style="margin-bottom: 0.4rem; font-size: 0.9rem;">2 camadas: Balanceio capacidade/simplicidade</li>
-                        <li style="font-size: 0.9rem;">3+ camadas: Risco de overfitting</li>
-                    </ul>
-                </div>
-                
-                <!-- Segunda linha -->
-                <div class="card" style="padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 140px; border-left: 4px solid var(--warning);">
-                    <h4 style="margin-bottom: 0.75rem; color: var(--warning); font-size: 1rem;"><i class="fas fa-bolt"></i> Por que ReLU?</h4>
-                    <ul style="flex: 1; display: flex; flex-direction: column; justify-content: center; margin: 0; padding-left: 1.2rem;">
-                        <li style="margin-bottom: 0.4rem; font-size: 0.9rem;">Não saturação (evita vanishing gradient)</li>
-                        <li style="margin-bottom: 0.4rem; font-size: 0.9rem;">Computacionalmente eficiente</li>
-                        <li style="font-size: 0.9rem;">Estado da arte em deep learning</li>
-                    </ul>
-                </div>
-                <div class="card" style="padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 140px; border-left: 4px solid var(--danger);">
-                    <h4 style="margin-bottom: 0.75rem; color: var(--danger); font-size: 1rem;"><i class="fas fa-wave-square"></i> Por que Sigmoid na saída?</h4>
-                    <ul style="flex: 1; display: flex; flex-direction: column; justify-content: center; margin: 0; padding-left: 1.2rem;">
-                        <li style="margin-bottom: 0.4rem; font-size: 0.9rem;">Classificação binária: output 0-1</li>
-                        <li style="margin-bottom: 0.4rem; font-size: 0.9rem;">Interpretável como probabilidade</li>
-                        <li style="font-size: 0.9rem;">Compatível com binary_crossentropy</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
         
         <!-- Slide 7: Análise Exploratória -->
         <section class="slide">
@@ -1003,6 +921,90 @@
                     <li style="font-size: 1rem; margin-bottom: 0.3rem;"><strong>Clustering:</strong> Temos labels conhecidos</li>
                     <li style="font-size: 1rem;"><strong>Multiclasse:</strong> Apenas duas classes disponíveis</li>
                 </ul>
+            </div>
+        </section>
+
+        <!-- Slide 6: Arquitetura da Rede Neural -->
+        <section class="slide">
+            <h1 style="font-size: 2rem; margin-bottom: 1rem;"><i class="fas fa-sitemap icon"></i>Arquitetura da Rede Neural</h1>
+            
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.25rem; margin: 0.75rem 0; align-items: start;">
+                <!-- Coluna Esquerda: Arquitetura da Rede Neural -->
+                <div class="highlight-card" style="text-align: center; padding: 1.25rem; min-height: 280px; display: flex; flex-direction: column; justify-content: center;">
+                    <h3 style="margin-bottom: 0.75rem; font-size: 1.1rem;"><i class="fas fa-brain icon"></i>Rede Neural Feedforward Densa</h3>
+                    <div style="background: rgba(255, 255, 255, 0.8); border-radius: 12px; padding: 1.5rem; margin: 0.75rem 0; font-family: 'JetBrains Mono', monospace; font-size: 1rem; line-height: 1.8; color: var(--text-primary); border: 2px solid rgba(74, 144, 226, 0.1); flex: 1; display: flex; flex-direction: column; justify-content: center;">
+                        Camada de Entrada: 30 neurônios (features)<br>
+                        ↓<br>
+                        Camada Oculta 1: 64 neurônios + ReLU + Dropout(0.3)<br>
+                        ↓<br>
+                        Camada Oculta 2: 32 neurônios + ReLU + Dropout(0.3)<br>
+                        ↓<br>
+                        Camada de Saída: 1 neurônio + Sigmoid
+                    </div>
+                </div>
+                
+                <!-- Coluna Direita: Cards de Estatísticas (empilhados) -->
+                <div style="display: flex; flex-direction: column; gap: 0.75rem; height: 100%; justify-content: space-between;">
+                    <div class="card stat-card" style="padding: 1rem; flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 60px;">
+                        <span class="stat-number" style="margin-bottom: 0.5rem;">2</span>
+                        <div class="stat-label" style="margin-bottom: 0.25rem;">Camadas Ocultas</div>
+                        <p style="font-size: 1rem; margin: 0; text-align: center;">Balanceio capacidade/simplicidade</p>
+                    </div>
+                    <div class="card stat-card" style="padding: 1rem; flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 60px;">
+                        <span class="stat-number" style="margin-bottom: 0.5rem;">64→32</span>
+                        <div class="stat-label" style="margin-bottom: 0.25rem;">Neurônios</div>
+                        <p style="font-size: 1rem; margin: 0; text-align: center;">Redução gradual</p>
+                    </div>
+                    <div class="card stat-card" style="padding: 1rem; flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 60px;">
+                        <span class="stat-number" style="margin-bottom: 0.5rem;">30%</span>
+                        <div class="stat-label" style="margin-bottom: 0.25rem;">Dropout</div>
+                        <p style="font-size: 1rem; margin: 0; text-align: center;">Regularização</p>
+                    </div>
+                    <div class="card stat-card" style="padding: 1rem; flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 60px;">
+                        <span class="stat-number" style="margin-bottom: 0.5rem;">ReLU</span>
+                        <div class="stat-label" style="margin-bottom: 0.25rem;">Ativação</div>
+                        <p style="font-size: 1rem; margin: 0; text-align: center;">Não saturação</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Layout 2x2 harmonioso para as 4 divs explicativas -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 1rem; margin: 1.25rem 0; align-items: stretch;">
+                <!-- Primeira linha -->
+                <div class="card" style="padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 140px; border-left: 4px solid var(--primary);">
+                    <h4 style="margin-bottom: 0.75rem; color: var(--primary); font-size: 1rem;"><i class="fas fa-arrow-right"></i> Por que Feedforward?</h4>
+                    <ul style="flex: 1; display: flex; flex-direction: column; justify-content: center; margin: 0; padding-left: 1.2rem;">
+                        <li style="margin-bottom: 0.4rem; font-size: 0.9rem;">Dados tabulares sem dependência sequencial</li>
+                        <li style="margin-bottom: 0.4rem; font-size: 0.9rem;">Estrutura simples e interpretável</li>
+                        <li style="font-size: 0.9rem;">Adequada para classificação binária</li>
+                    </ul>
+                </div>
+                <div class="card" style="padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 140px; border-left: 4px solid var(--success);">
+                    <h4 style="margin-bottom: 0.75rem; color: var(--success); font-size: 1rem;"><i class="fas fa-layer-group"></i> Por que 2 Camadas Ocultas?</h4>
+                    <ul style="flex: 1; display: flex; flex-direction: column; justify-content: center; margin: 0; padding-left: 1.2rem;">
+                        <li style="margin-bottom: 0.4rem; font-size: 0.9rem;">1 camada: Insuficiente para padrões complexos</li>
+                        <li style="margin-bottom: 0.4rem; font-size: 0.9rem;">2 camadas: Balanceio capacidade/simplicidade</li>
+                        <li style="font-size: 0.9rem;">3+ camadas: Risco de overfitting</li>
+                    </ul>
+                </div>
+                
+                <!-- Segunda linha -->
+                <div class="card" style="padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 140px; border-left: 4px solid var(--warning);">
+                    <h4 style="margin-bottom: 0.75rem; color: var(--warning); font-size: 1rem;"><i class="fas fa-bolt"></i> Por que ReLU?</h4>
+                    <ul style="flex: 1; display: flex; flex-direction: column; justify-content: center; margin: 0; padding-left: 1.2rem;">
+                        <li style="margin-bottom: 0.4rem; font-size: 0.9rem;">Não saturação (evita vanishing gradient)</li>
+                        <li style="margin-bottom: 0.4rem; font-size: 0.9rem;">Computacionalmente eficiente</li>
+                        <li style="font-size: 0.9rem;">Estado da arte em deep learning</li>
+                    </ul>
+                </div>
+                <div class="card" style="padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 140px; border-left: 4px solid var(--danger);">
+                    <h4 style="margin-bottom: 0.75rem; color: var(--danger); font-size: 1rem;"><i class="fas fa-wave-square"></i> Por que Sigmoid na saída?</h4>
+                    <ul style="flex: 1; display: flex; flex-direction: column; justify-content: center; margin: 0; padding-left: 1.2rem;">
+                        <li style="margin-bottom: 0.4rem; font-size: 0.9rem;">Classificação binária: output 0-1</li>
+                        <li style="margin-bottom: 0.4rem; font-size: 0.9rem;">Interpretável como probabilidade</li>
+                        <li style="font-size: 0.9rem;">Compatível com binary_crossentropy</li>
+                    </ul>
+                </div>
             </div>
         </section>
 
