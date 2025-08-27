@@ -761,9 +761,29 @@
         <section class="slide">
             <h1 style="font-size: 2rem; margin-bottom: 1rem;"><i class="fas fa-chart-bar icon"></i>Análise Exploratória</h1>
             
-            <div class="grid grid-2" style="gap: 1rem; margin-bottom: 1rem;">
-                <!-- Distribuição da Variável Target -->
+            <!-- Pairplot em coluna única -->
+            <div style="margin-bottom: 1rem;">
                 <div class="card" style="padding: 1rem;">
+                    <h3 style="margin-bottom: 0.75rem; font-size: 1.1rem;"><i class="fas fa-project-diagram icon"></i>Pairplot</h3>
+                    <div style="text-align: center; margin: 1rem 0;">
+                        <img src="imagens/pairplot.jpeg" alt="Pairplot - Análise de Relacionamentos entre Variáveis do Câncer de Mama" 
+                             style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15); margin: 0.5rem 0;">
+                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 1rem; border-radius: 8px; margin-top: 0.5rem; font-size: 0.9rem;">
+                            <i class="fas fa-chart-line" style="margin-right: 0.5rem;"></i>
+                            <span style="font-weight: 600;">Correlações e Distribuições Visualizadas</span>
+                        </div>
+                    </div>
+                    <ul style="font-size: 0.9rem; margin: 0.75rem 0; padding-left: 1rem;">
+                        <li style="margin-bottom: 0.25rem;">Separação clara entre classes</li>
+                        <li style="margin-bottom: 0.25rem;">Features correlacionadas identificadas</li>
+                        <li>Padrões de distribuição revelados</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Distribuição da Variável Target -->
+             <div style="margin-bottom: 1rem;">
+                 <div class="card" style="padding: 1rem;">
                     <h3 style="margin-bottom: 0.75rem; font-size: 1.1rem;"><i class="fas fa-chart-pie icon"></i>Distribuição da Variável Target</h3>
                     <div style="text-align: center; margin: 1rem 0;">
                         <div style="display: inline-block; margin: 0 1rem;">
@@ -778,22 +798,6 @@
                     <div class="highlight-card" style="padding: 0.75rem; margin-top: 0.75rem;">
                         <p style="margin: 0; font-size: 0.9rem;"><strong>Análise do Desbalanceamento:</strong> Dataset moderadamente desbalanceado (razão ~1.7:1). Estratificação necessária na divisão treino/teste.</p>
                     </div>
-                </div>
-                
-                <!-- Pairplot -->
-                <div class="card" style="padding: 1rem;">
-                    <h3 style="margin-bottom: 0.75rem; font-size: 1.1rem;"><i class="fas fa-project-diagram icon"></i>Pairplot</h3>
-                    <div style="text-align: center; margin: 1rem 0;">
-                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 2rem; border-radius: 12px; margin: 0.5rem 0;">
-                            <i class="fas fa-chart-line" style="font-size: 2rem; margin-bottom: 0.5rem;"></i>
-                            <div style="font-size: 1.1rem; font-weight: 600;">Correlações Visualizadas</div>
-                        </div>
-                    </div>
-                    <ul style="font-size: 0.9rem; margin: 0.75rem 0; padding-left: 1rem;">
-                        <li style="margin-bottom: 0.25rem;">Separação clara entre classes</li>
-                        <li style="margin-bottom: 0.25rem;">Features correlacionadas identificadas</li>
-                        <li>Padrões de distribuição revelados</li>
-                    </ul>
                 </div>
             </div>
             
