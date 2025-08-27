@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fluxograma da Metodologia - Classificação de Câncer de Mama</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4a90e2;
+            --secondary: #7bb3f0;
+            --accent: #50b3a2;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --error: #e57373;
+            --text-primary: #2c3e50;
+            --text-secondary: #546e7a;
+            --bg-light: #f8f9fa;
+            --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            box-shadow: var(--card-shadow);
+            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .flowchart {
+            width: 100%;
+            height: auto;
+            margin: 2rem 0;
+        }
+
+        .step-box {
+            fill: #ffffff;
+            stroke: var(--primary);
+            stroke-width: 2;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
+            transition: var(--transition);
+        }
+
+        .step-box:hover {
+            fill: rgba(74, 144, 226, 0.05);
+            stroke-width: 3;
+            filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.15));
+        }
+
+        .decision-box {
+            fill: #fff3cd;
+            stroke: var(--warning);
+            stroke-width: 2;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
+        }
+
+        .decision-box:hover {
+            fill: rgba(255, 152, 0, 0.1);
+            stroke-width: 3;
+        }
+
+        .process-box {
+            fill: #d1ecf1;
+            stroke: var(--accent);
+            stroke-width: 2;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
+        }
+
+        .process-box:hover {
+            fill: rgba(80, 179, 162, 0.1);
+            stroke-width: 3;
+        }
+
+        .result-box {
+            fill: #d4edda;
+            stroke: var(--success);
+            stroke-width: 2;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
+        }
+
+        .result-box:hover {
+            fill: rgba(76, 175, 80, 0.1);
+            stroke-width: 3;
+        }
+
+        .step-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            fill: var(--text-primary);
+            text-anchor: middle;
+            dominant-baseline: middle;
+        }
+
+        .step-title {
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .arrow {
+            stroke: var(--primary);
+            stroke-width: 2;
+            fill: var(--primary);
+            marker-end: url(#arrowhead);
+        }
+
+        .icon {
+            fill: var(--primary);
+            font-size: 20px;
+        }
+
+        .legend {
+            margin-top: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            border: 1px solid rgba(74, 144, 226, 0.2);
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            border: 2px solid;
+        }
+
+        .legend-color.step { background: #ffffff; border-color: var(--primary); }
+        .legend-color.decision { background: #fff3cd; border-color: var(--warning); }
+        .legend-color.process { background: #d1ecf1; border-color: var(--accent); }
+        .legend-color.result { background: #d4edda; border-color: var(--success); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-project-diagram" style="color: var(--primary); margin-right: 1rem;"></i>Fluxograma da Metodologia</h1>
+            <p class="subtitle">Classificação de Câncer de Mama com Redes Neurais</p>
+        </div>
+
+        <svg class="flowchart" viewBox="0 0 1200 2800" xmlns="http://www.w3.org/2000/svg">
+            <!-- Definições de marcadores para setas -->
+            <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="var(--primary)" />
+                </marker>
+            </defs>
+
+            <!-- Início -->
+            <rect x="500" y="20" width="200" height="60" rx="30" class="step-box" />
+            <text x="600" y="50" class="step-text step-title">INÍCIO</text>
+
+            <!-- Seta -->
+            <line x1="600" y1="80" x2="600" y2="120" class="arrow" />
+
+            <!-- Coleta de Dados -->
+            <rect x="450" y="140" width="300" height="80" rx="15" class="step-box" />
+            <text x="600" y="170" class="step-text step-title">📊 Coleta de Dados</text>
+            <text x="600" y="195" class="step-text">Wisconsin Breast Cancer Dataset</text>
+
+            <!-- Seta -->
+            <line x1="600" y1="220" x2="600" y2="260" class="arrow" />
+
+            <!-- Análise Exploratória -->
+            <rect x="450" y="280" width="300" height="80" rx="15" class="process-box" />
+            <text x="600" y="310" class="step-text step-title">🔍 Análise Exploratória</text>
+            <text x="600" y="335" class="step-text">Estatísticas e Visualizações</text>
+
+            <!-- Seta -->
+            <line x1="600" y1="360" x2="600" y2="400" class="arrow" />
+
+            <!-- Pré-processamento -->
+            <rect x="450" y="420" width="300" height="100" rx="15" class="process-box" />
+            <text x="600" y="450" class="step-text step-title">⚙️ Pré-processamento</text>
+            <text x="600" y="475" class="step-text">• Normalização dos dados</text>
+            <text x="600" y="495" class="step-text">• Tratamento de outliers</text>
+
+            <!-- Seta -->
+            <line x1="600" y1="520" x2="600" y2="560" class="arrow" />
+
+            <!-- Divisão dos Dados -->
+            <rect x="450" y="580" width="300" height="100" rx="15" class="step-box" />
+            <text x="600" y="610" class="step-text step-title">📂 Divisão dos Dados</text>
+            <text x="600" y="635" class="step-text">Treino (80%) / Teste (20%)</text>
+            <text x="600" y="655" class="step-text">Estratificação por classe</text>
+
+            <!-- Seta -->
+            <line x1="600" y1="680" x2="600" y2="720" class="arrow" />
+
+            <!-- Modelos Baseline -->
+            <rect x="100" y="740" width="250" height="100" rx="15" class="step-box" />
+            <text x="225" y="770" class="step-text step-title">📈 Modelos Baseline</text>
+            <text x="225" y="795" class="step-text">• Dummy Classifier</text>
+            <text x="225" y="815" class="step-text">• Regressão Logística</text>
+
+            <!-- Rede Neural Base -->
+            <rect x="450" y="740" width="300" height="100" rx="15" class="process-box" />
+            <text x="600" y="770" class="step-text step-title">🧠 Rede Neural Base</text>
+            <text x="600" y="795" class="step-text">Arquitetura simples</text>
+            <text x="600" y="815" class="step-text">2 camadas ocultas</text>
+
+            <!-- Rede Neural Otimizada -->
+            <rect x="850" y="740" width="250" height="100" rx="15" class="process-box" />
+            <text x="975" y="770" class="step-text step-title">🎯 Rede Neural Otimizada</text>
+            <text x="975" y="795" class="step-text">Grid Search</text>
+            <text x="975" y="815" class="step-text">Hiperparâmetros</text>
+
+            <!-- Setas dos modelos -->
+            <line x1="600" y1="720" x2="225" y2="740" class="arrow" />
+            <line x1="600" y1="720" x2="600" y2="740" class="arrow" />
+            <line x1="600" y1="720" x2="975" y2="740" class="arrow" />
+
+            <!-- Convergência das setas -->
+            <line x1="225" y1="840" x2="600" y2="900" class="arrow" />
+            <line x1="600" y1="840" x2="600" y2="900" class="arrow" />
+            <line x1="975" y1="840" x2="600" y2="900" class="arrow" />
+
+            <!-- Treinamento -->
+            <rect x="450" y="920" width="300" height="80" rx="15" class="process-box" />
+            <text x="600" y="950" class="step-text step-title">🏋️ Treinamento</text>
+            <text x="600" y="975" class="step-text">Otimização dos modelos</text>
+
+            <!-- Seta -->
+            <line x1="600" y1="1000" x2="600" y2="1040" class="arrow" />
+
+            <!-- Validação -->
+            <rect x="450" y="1060" width="300" height="80" rx="15" class="decision-box" />
+            <text x="600" y="1090" class="step-text step-title">✅ Validação</text>
+            <text x="600" y="1115" class="step-text">Cross-validation</text>
+
+            <!-- Seta -->
+            <line x1="600" y1="1140" x2="600" y2="1180" class="arrow" />
+
+            <!-- Avaliação -->
+            <rect x="450" y="1200" width="300" height="120" rx="15" class="result-box" />
+            <text x="600" y="1230" class="step-text step-title">📊 Avaliação</text>
+            <text x="600" y="1255" class="step-text">• Acurácia</text>
+            <text x="600" y="1275" class="step-text">• Precisão</text>
+            <text x="600" y="1295" class="step-text">• Recall</text>
+            <text x="600" y="1315" class="step-text">• F1-Score</text>
+
+            <!-- Seta -->
+            <line x1="600" y1="1320" x2="600" y2="1360" class="arrow" />
+
+            <!-- Matriz de Confusão -->
+            <rect x="200" y="1380" width="200" height="80" rx="15" class="result-box" />
+            <text x="300" y="1410" class="step-text step-title">📋 Matriz de</text>
+            <text x="300" y="1435" class="step-text step-title">Confusão</text>
+
+            <!-- Curva ROC -->
+            <rect x="500" y="1380" width="200" height="80" rx="15" class="result-box" />
+            <text x="600" y="1410" class="step-text step-title">📈 Curva ROC</text>
+            <text x="600" y="1435" class="step-text">AUC Score</text>
+
+            <!-- Análise de Resultados -->
+            <rect x="800" y="1380" width="200" height="80" rx="15" class="result-box" />
+            <text x="900" y="1410" class="step-text step-title">📊 Análise de</text>
+            <text x="900" y="1435" class="step-text step-title">Resultados</text>
+
+            <!-- Setas para análises -->
+            <line x1="600" y1="1360" x2="300" y2="1380" class="arrow" />
+            <line x1="600" y1="1360" x2="600" y2="1380" class="arrow" />
+            <line x1="600" y1="1360" x2="900" y2="1380" class="arrow" />
+
+            <!-- Convergência das análises -->
+            <line x1="300" y1="1460" x2="600" y2="1520" class="arrow" />
+            <line x1="600" y1="1460" x2="600" y2="1520" class="arrow" />
+            <line x1="900" y1="1460" x2="600" y2="1520" class="arrow" />
+
+            <!-- Comparação de Modelos -->
+            <rect x="450" y="1540" width="300" height="100" rx="15" class="decision-box" />
+            <text x="600" y="1570" class="step-text step-title">⚖️ Comparação de Modelos</text>
+            <text x="600" y="1595" class="step-text">Seleção do melhor modelo</text>
+            <text x="600" y="615" class="step-text">baseado nas métricas</text>
+
+            <!-- Seta -->
+            <line x1="600" y1="1640" x2="600" y2="1680" class="arrow" />
+
+            <!-- Interpretação -->
+            <rect x="450" y="1700" width="300" height="100" rx="15" class="process-box" />
+            <text x="600" y="1730" class="step-text step-title">🔍 Interpretação</text>
+            <text x="600" y="1755" class="step-text">Análise da importância</text>
+            <text x="600" y="1775" class="step-text">das características</text>
+
+            <!-- Seta -->
+            <line x1="600" y1="1800" x2="600" y2="1840" class="arrow" />
+
+            <!-- Conclusões -->
+            <rect x="450" y="1860" width="300" height="100" rx="15" class="result-box" />
+            <text x="600" y="1890" class="step-text step-title">📝 Conclusões</text>
+            <text x="600" y="1915" class="step-text">Insights e</text>
+            <text x="600" y="1935" class="step-text">Recomendações</text>
+
+            <!-- Seta -->
+            <line x1="600" y1="1960" x2="600" y2="2000" class="arrow" />
+
+            <!-- Fim -->
+            <rect x="500" y="2020" width="200" height="60" rx="30" class="step-box" />
+            <text x="600" y="2050" class="step-text step-title">FIM</text>
+        </svg>
+
+        <!-- Legenda -->
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color step"></div>
+                <span><strong>Etapas Principais:</strong> Processos fundamentais do projeto</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color decision"></div>
+                <span><strong>Decisões:</strong> Pontos de validação e comparação</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color process"></div>
+                <span><strong>Processamento:</strong> Análises e transformações de dados</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color result"></div>
+                <span><strong>Resultados:</strong> Outputs e métricas de avaliação</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
