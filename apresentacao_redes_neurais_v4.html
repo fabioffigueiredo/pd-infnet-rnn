@@ -757,126 +757,133 @@
 
         </section>
 
-
-        
         <!-- Slide 7: Análise Exploratória -->
         <section class="slide">
             <h1 style="font-size: 2rem; margin-bottom: 1rem;"><i class="fas fa-chart-bar icon"></i>Análise Exploratória</h1>
             
-            <h3 style="font-size: 1.1rem; margin: 1rem 0 0.75rem 0;"><i class="fas fa-bullseye icon"></i>Distribuição da Variável Target (Y)</h3>
-            <div class="grid grid-2" style="gap: 1rem; margin: 0.75rem 0;">
-                <div class="card stat-card benign" style="padding: 1rem; min-height: 80px;">
-                    <span class="stat-number" style="font-size: 2rem;">357</span>
-                    <div class="stat-label" style="font-size: 1rem;">Casos Benignos (B)</div>
-                <p style="font-size: 1rem; margin: 0;">62.7%</p>
+            <div class="grid grid-2" style="gap: 1rem; margin-bottom: 1rem;">
+                <!-- Distribuição da Variável Target -->
+                <div class="card" style="padding: 1rem;">
+                    <h3 style="margin-bottom: 0.75rem; font-size: 1.1rem;"><i class="fas fa-chart-pie icon"></i>Distribuição da Variável Target</h3>
+                    <div style="text-align: center; margin: 1rem 0;">
+                        <div style="display: inline-block; margin: 0 1rem;">
+                            <div style="font-size: 2rem; color: var(--success); margin-bottom: 0.25rem;">357</div>
+                            <div style="font-size: 0.9rem; color: var(--text-secondary);">Benignos (62.7%)</div>
+                        </div>
+                        <div style="display: inline-block; margin: 0 1rem;">
+                            <div style="font-size: 2rem; color: var(--danger); margin-bottom: 0.25rem;">212</div>
+                            <div style="font-size: 0.9rem; color: var(--text-secondary);">Malignos (37.3%)</div>
+                        </div>
+                    </div>
+                    <div class="highlight-card" style="padding: 0.75rem; margin-top: 0.75rem;">
+                        <p style="margin: 0; font-size: 0.9rem;"><strong>Análise do Desbalanceamento:</strong> Dataset moderadamente desbalanceado (razão ~1.7:1). Estratificação necessária na divisão treino/teste.</p>
+                    </div>
                 </div>
-                <div class="card stat-card malignant" style="padding: 1rem; min-height: 80px;">
-                    <span class="stat-number" style="font-size: 2rem;">212</span>
-                    <div class="stat-label" style="font-size: 1rem;">Casos Malignos (M)</div>
-                <p style="font-size: 1rem; margin: 0;">37.3%</p>
-                </div>
-            </div>
-
-            <div class="highlight-card" style="padding: 1rem; margin: 1rem 0;">
-                <h3 style="font-size: 1rem; margin-bottom: 0.75rem;"><i class="fas fa-balance-scale icon"></i>Análise do Desbalanceamento</h3>
-                <ul style="margin: 0;">
-                    <li style="font-size: 1rem; margin-bottom: 0.4rem;"><strong>Desbalanceamento moderado:</strong> Razão aproximada 1.7:1</li>
-                <li style="font-size: 1rem; margin-bottom: 0.4rem;"><strong>Não crítico:</strong> Não requer técnicas especiais de balanceamento</li>
-                <li style="font-size: 1rem; margin-bottom: 0.4rem;"><strong>Representativo:</strong> Ambas as classes têm amostras suficientes</li>
-                <li style="font-size: 1rem;"><strong>Realista:</strong> Reflete a distribuição real na população</li>
-                </ul>
-            </div>
-
-            <div class="image-container" style="margin: 1rem 0;">
-                <h3 style="font-size: 1.1rem; margin-bottom: 0.75rem;">🔍 Pairplot - Matriz de Correlação e Distribuição das Features</h3>
                 
-                <!-- Imagem real do pairplot -->
-                <img src="imagens/pairplot.jpeg" alt="Pairplot - Análise de Relacionamentos entre Variáveis do Câncer de Mama" style="max-width: 700px; height: auto; border-radius: 12px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);">
-                
-                <p style="text-align: center; font-size: 1rem; color: var(--text-secondary); margin-top: 0.75rem;">
-                    <strong>Interpretação:</strong> Matriz mostrando correlações entre features principais e separabilidade das classes (Benigno vs Maligno)
-                </p>
-            </div>
-
-            <div class="highlight-card" style="padding: 1rem; margin: 0.75rem 0;">
-                <h3 style="font-size: 1rem; margin-bottom: 0.75rem;"><i class="fas fa-search icon"></i>Insights do Pairplot:</h3>
-                <div class="grid grid-2" style="gap: 0.75rem;">
-                    <div class="card" style="border-left: 4px solid var(--success); padding: 0.75rem;">
-                        <h4 style="font-size: 1rem; margin-bottom: 0.5rem;"><i class="fas fa-link"></i> Correlações Fortes</h4>
-                <p style="font-size: 1rem; margin: 0;">Radius ↔ Perimeter ↔ Area (esperado geometricamente)</p>
+                <!-- Pairplot -->
+                <div class="card" style="padding: 1rem;">
+                    <h3 style="margin-bottom: 0.75rem; font-size: 1.1rem;"><i class="fas fa-project-diagram icon"></i>Pairplot</h3>
+                    <div style="text-align: center; margin: 1rem 0;">
+                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 2rem; border-radius: 12px; margin: 0.5rem 0;">
+                            <i class="fas fa-chart-line" style="font-size: 2rem; margin-bottom: 0.5rem;"></i>
+                            <div style="font-size: 1.1rem; font-weight: 600;">Correlações Visualizadas</div>
+                        </div>
                     </div>
-                    <div class="card" style="border-left: 4px solid var(--primary); padding: 0.75rem;">
-                        <h4 style="font-size: 1rem; margin-bottom: 0.5rem;"><i class="fas fa-eye"></i> Separabilidade Visual</h4>
-                <p style="font-size: 1rem; margin: 0;">Classes se separam bem em várias combinações de features</p>
-                    </div>
-                    <div class="card" style="border-left: 4px solid var(--warning); padding: 0.75rem;">
-                        <h4 style="font-size: 1rem; margin-bottom: 0.5rem;"><i class="fas fa-chart-bar"></i> Distribuições</h4>
-                <p style="font-size: 1rem; margin: 0;">Histograma mostra diferentes padrões entre benigno e maligno</p>
-                    </div>
-                    <div class="card" style="border-left: 4px solid var(--accent); padding: 0.75rem;">
-                        <h4 style="font-size: 1rem; margin-bottom: 0.5rem;"><i class="fas fa-brain"></i> Relevância para NN</h4>
-                <p style="font-size: 1rem; margin: 0;">Confirma potencial discriminativo dos dados para classificação</p>
-                    </div>
+                    <ul style="font-size: 0.9rem; margin: 0.75rem 0; padding-left: 1rem;">
+                        <li style="margin-bottom: 0.25rem;">Separação clara entre classes</li>
+                        <li style="margin-bottom: 0.25rem;">Features correlacionadas identificadas</li>
+                        <li>Padrões de distribuição revelados</li>
+                    </ul>
                 </div>
             </div>
-
-            <div class="methodology-card card" style="padding: 1rem; margin: 0.75rem 0;">
-                <h3 style="font-size: 1rem; margin-bottom: 0.75rem;"><i class="fas fa-cogs icon"></i>Implicações para o Modelo:</h3>
-                <ul style="margin: 0;">
-                    <li style="font-size: 1rem; margin-bottom: 0.4rem;"><strong>Usar métricas balanceadas</strong> (F1-score, AUC-ROC)</li>
-                <li style="font-size: 1rem; margin-bottom: 0.4rem;"><strong>Considerar precision e recall</strong> para ambas as classes</li>
-                <li style="font-size: 1rem; margin-bottom: 0.4rem;"><strong>Stratified sampling</strong> na divisão treino/teste</li>
-                <li style="font-size: 1rem; margin-bottom: 0.4rem;"><strong>Foco no Recall</strong> para casos malignos (mais crítico clinicamente)</li>
-                <li style="font-size: 1rem;"><strong>Normalização obrigatória</strong> devido às diferentes escalas observadas</li>
-                </ul>
+            
+            <div class="grid grid-2" style="gap: 1rem;">
+                <!-- Insights do Pairplot -->
+                <div class="card" style="padding: 1rem;">
+                    <h3 style="margin-bottom: 0.75rem; font-size: 1.1rem;"><i class="fas fa-lightbulb icon"></i>Insights do Pairplot</h3>
+                    <ul style="font-size: 0.9rem; margin: 0; padding-left: 1rem;">
+                        <li style="margin-bottom: 0.5rem;"><strong>Separabilidade:</strong> Classes bem separadas em várias dimensões</li>
+                        <li style="margin-bottom: 0.5rem;"><strong>Correlações:</strong> Features relacionadas mostram padrões similares</li>
+                        <li style="margin-bottom: 0.5rem;"><strong>Outliers:</strong> Poucos valores extremos identificados</li>
+                        <li><strong>Distribuições:</strong> Algumas features seguem distribuição normal</li>
+                    </ul>
+                </div>
+                
+                <!-- Implicações para o Modelo -->
+                <div class="card" style="padding: 1rem;">
+                    <h3 style="margin-bottom: 0.75rem; font-size: 1.1rem;"><i class="fas fa-cogs icon"></i>Implicações para o Modelo</h3>
+                    <ul style="font-size: 0.9rem; margin: 0; padding-left: 1rem;">
+                        <li style="margin-bottom: 0.5rem;"><strong>Boa separabilidade:</strong> Modelo deve ter boa performance</li>
+                        <li style="margin-bottom: 0.5rem;"><strong>Multicolinearidade:</strong> Features correlacionadas podem ser redundantes</li>
+                        <li style="margin-bottom: 0.5rem;"><strong>Normalização:</strong> Escalas diferentes requerem padronização</li>
+                        <li><strong>Regularização:</strong> Pode ajudar com correlações entre features</li>
+                    </ul>
+                </div>
             </div>
         </section>
 
-        <!-- Slide 8: Features Mais Relevantes -->
+        <!-- Slide 8: Features Mais e Menos Relevantes -->
         <section class="slide">
-            <h1 style="font-size: 2rem; margin-bottom: 1rem;"><i class="fas fa-trophy icon"></i>Features Mais e Menos Relevantes</h1>
+            <h1 style="font-size: 2rem; margin-bottom: 1rem;"><i class="fas fa-star icon"></i>Features Mais e Menos Relevantes</h1>
             
-            <h3 style="font-size: 1.1rem; margin-bottom: 0.75rem;"><i class="fas fa-medal icon"></i>MAIS RELEVANTES (Baseado em Correlação e Importância Clínica):</h3>
-            <div class="grid grid-2" style="gap: 0.75rem; margin-bottom: 1rem;">
-                <div class="card" style="border-left: 4px solid var(--success); padding: 0.75rem;">
-                    <h4 style="font-size: 1rem; margin-bottom: 0.4rem;">concave_points_worst:</h4>
-                <p style="font-size: 1rem; margin-bottom: 0.3rem;">Alta correlação com malignidade</p>
-                <small style="font-size: 0.9rem;">Tumores malignos tendem a ter contornos mais irregulares</small>
+            <div class="grid grid-2" style="gap: 1rem; margin-bottom: 1rem;">
+                <!-- Features Mais Relevantes -->
+                <div class="card" style="padding: 1rem;">
+                    <h3 style="margin-bottom: 0.75rem; font-size: 1.1rem; color: var(--success);"><i class="fas fa-arrow-up icon"></i>Features Mais Relevantes</h3>
+                    <div style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white; padding: 1rem; border-radius: 12px; margin-bottom: 0.75rem;">
+                        <div style="text-align: center;">
+                            <i class="fas fa-trophy" style="font-size: 1.5rem; margin-bottom: 0.5rem;"></i>
+                            <div style="font-size: 1.1rem; font-weight: 600;">Top Features</div>
+                        </div>
+                    </div>
+                    <ul style="font-size: 0.9rem; margin: 0; padding-left: 1rem;">
+                        <li style="margin-bottom: 0.5rem;"><strong>worst_perimeter:</strong> Perímetro da pior área</li>
+                        <li style="margin-bottom: 0.5rem;"><strong>worst_concave_points:</strong> Pontos côncavos da pior área</li>
+                        <li style="margin-bottom: 0.5rem;"><strong>mean_concave_points:</strong> Média de pontos côncavos</li>
+                        <li style="margin-bottom: 0.5rem;"><strong>worst_radius:</strong> Raio da pior área</li>
+                        <li><strong>worst_area:</strong> Área da pior região</li>
+                    </ul>
                 </div>
-                <div class="card" style="border-left: 4px solid var(--success); padding: 0.75rem;">
-                    <h4 style="font-size: 1rem; margin-bottom: 0.4rem;">perimeter_worst:</h4>
-                <p style="font-size: 1rem; margin-bottom: 0.3rem;">Forte indicador de malignidade</p>
-                <small style="font-size: 0.9rem;">Tumores maiores frequentemente são malignos</small>
-                </div>
-                <div class="card" style="border-left: 4px solid var(--success); padding: 0.75rem;">
-                    <h4 style="font-size: 1rem; margin-bottom: 0.4rem;">concavity_worst:</h4>
-                <p style="font-size: 1rem; margin-bottom: 0.3rem;">Relacionado à forma irregular</p>
-                <small style="font-size: 0.9rem;">Malignidade associada a bordas côncavas</small>
-                </div>
-                <div class="card" style="border-left: 4px solid var(--success); padding: 0.75rem;">
-                    <h4 style="font-size: 1rem; margin-bottom: 0.4rem;">radius_worst:</h4>
-                <p style="font-size: 1rem; margin-bottom: 0.3rem;">Tamanho máximo do tumor</p>
-                <small style="font-size: 0.9rem;">Tumores malignos tendem a crescer mais</small>
+                
+                <!-- Features Menos Relevantes -->
+                <div class="card" style="padding: 1rem;">
+                    <h3 style="margin-bottom: 0.75rem; font-size: 1.1rem; color: var(--danger);"><i class="fas fa-arrow-down icon"></i>Features Menos Relevantes</h3>
+                    <div style="background: linear-gradient(135deg, #dc3545 0%, #fd7e14 100%); color: white; padding: 1rem; border-radius: 12px; margin-bottom: 0.75rem;">
+                        <div style="text-align: center;">
+                            <i class="fas fa-exclamation-triangle" style="font-size: 1.5rem; margin-bottom: 0.5rem;"></i>
+                            <div style="font-size: 1.1rem; font-weight: 600;">Menor Impacto</div>
+                        </div>
+                    </div>
+                    <ul style="font-size: 0.9rem; margin: 0; padding-left: 1rem;">
+                        <li style="margin-bottom: 0.5rem;"><strong>fractal_dimension_se:</strong> Erro padrão da dimensão fractal</li>
+                        <li style="margin-bottom: 0.5rem;"><strong>texture_se:</strong> Erro padrão da textura</li>
+                        <li style="margin-bottom: 0.5rem;"><strong>smoothness_se:</strong> Erro padrão da suavidade</li>
+                        <li style="margin-bottom: 0.5rem;"><strong>symmetry_se:</strong> Erro padrão da simetria</li>
+                        <li><strong>fractal_dimension_mean:</strong> Média da dimensão fractal</li>
+                    </ul>
                 </div>
             </div>
-
-            <h3 style="font-size: 1.1rem; margin: 1rem 0 0.75rem 0;"><i class="fas fa-minus-circle icon"></i>MENOS RELEVANTES:</h3>
-            <div class="grid grid-2" style="gap: 0.75rem; margin-bottom: 1rem;">
-                <div class="card" style="border-left: 4px solid var(--warning); padding: 0.75rem;">
-                    <h4 style="font-size: 1rem; margin-bottom: 0.4rem;">fractal_dimension_mean:</h4>
-                <p style="font-size: 1rem; margin-bottom: 0.3rem;">Baixa correlação</p>
-                <small style="font-size: 0.9rem;">Medida complexa, menos interpretável clinicamente</small>
+            
+            <div class="highlight-card" style="padding: 1rem; margin-top: 1rem;">
+                <h3 style="margin-bottom: 0.75rem; font-size: 1.1rem;"><i class="fas fa-info-circle icon"></i>Justificativa para Usar Todas as 30 Features</h3>
+                <div class="grid grid-2" style="gap: 1rem;">
+                    <div>
+                        <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1rem;">Razões Técnicas:</h4>
+                        <ul style="font-size: 0.9rem; margin: 0; padding-left: 1rem;">
+                            <li style="margin-bottom: 0.25rem;">Redes neurais podem capturar interações complexas</li>
+                            <li style="margin-bottom: 0.25rem;">Features "menos relevantes" podem ter valor combinado</li>
+                            <li>Regularização (dropout) previne overfitting</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1rem;">Benefícios:</h4>
+                        <ul style="font-size: 0.9rem; margin: 0; padding-left: 1rem;">
+                            <li style="margin-bottom: 0.25rem;">Máxima informação disponível para o modelo</li>
+                            <li style="margin-bottom: 0.25rem;">Evita perda de padrões sutis</li>
+                            <li>Permite que a rede aprenda automaticamente</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="card" style="border-left: 4px solid var(--warning); padding: 0.75rem;">
-                    <h4 style="font-size: 1rem; margin-bottom: 0.4rem;">symmetry_se:</h4>
-                <p style="font-size: 1rem; margin-bottom: 0.3rem;">Variabilidade baixa</p>
-                <small style="font-size: 0.9rem;">Erro padrão da simetria pouco discriminativo</small>
-                </div>
-            </div>
-
-            <div class="methodology-card card" style="padding: 1rem; margin: 1rem 0;">
-                <h3 style="font-size: 1rem; margin-bottom: 0.5rem;"><i class="fas fa-microscope icon"></i>Estratégia Escolhida: Usar TODAS as 30 features</h3>
-                <p style="font-size: 1rem; margin: 0;"><strong>Justificativas:</strong> Redes neurais são robustas, regularização previne overfitting, informação complementar, benchmark com literatura.</p>
             </div>
         </section>
 
