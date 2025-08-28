@@ -640,124 +640,7 @@
             </div>
         </section>
 
-        <!-- Slide 5: Features e Dificuldades -->
-        <section class="slide">
-            <h1 style="font-size: 1.75rem; margin-bottom: 1rem;"><i class="fas fa-microscope icon"></i>Features: Complexidade e Desafios</h1>
-            
-            <div class="methodology-card card" style="padding: 1rem; margin: 0.75rem 0;">
-                <h3 style="font-size: 1rem; margin-bottom: 0.75rem;"><i class="fas fa-calculator icon"></i>Estrutura dos Dados: 30 Features Numéricas</h3>
-                <p style="margin-bottom: 0.5rem; font-size: 0.9rem;">Cada feature é calculada em 3 estatísticas:</p>
-                <ul style="margin: 0.5rem 0; padding-left: 1.25rem;">
-                    <li style="margin-bottom: 0.25rem; font-size: 1rem;"><strong>Mean (média):</strong> Valor médio da característica</li>
-                    <li style="margin-bottom: 0.25rem; font-size: 1rem;"><strong>SE (standard error):</strong> Erro padrão da característica</li>
-                    <li style="margin-bottom: 0.25rem; font-size: 1rem;"><strong>Worst (pior valor):</strong> Maior valor (mais extremo) da característica</li>
-                </ul>
-                <p style="margin: 0.5rem 0 0 0; font-size: 1rem;"><strong>Fórmula:</strong> 10 Características Morfológicas × 3 Estatísticas = 30 Features</p>
-            </div>
-
-            <div class="image-container" style="margin: 0.75rem 0; padding: 0.75rem;">
-                <h3 style="font-size: 1rem; margin-bottom: 0.75rem;">🧬 Heatmap de Correlação das Features</h3>
-                <img src="imagens/heatmap.jpeg" alt="Heatmap de Correlação das Features" style="max-width: 700px;">
-            </div>
-
-            <h3 style="font-size: 1.1rem; margin: 1rem 0 0.75rem 0;"><i class="fas fa-dna icon"></i>10 Características Morfológicas Base:</h3>
-            <div class="grid grid-2">
-                <div class="card">
-                    <h4>radius:</h4> <p>Distância média do centro aos pontos do perímetro</p>
-                </div>
-                <div class="card">
-                    <h4>texture:</h4> <p>Desvio padrão dos valores de escala de cinza</p>
-                </div>
-                <div class="card">
-                    <h4>perimeter:</h4> <p>Perímetro do núcleo celular</p>
-                </div>
-                <div class="card">
-                    <h4>area:</h4> <p>Área do núcleo celular</p>
-                </div>
-                <div class="card">
-                    <h4>smoothness:</h4> <p>Variação local nos comprimentos dos raios</p>
-                </div>
-                <div class="card">
-                    <h4>compactness:</h4> <p>(perímetro² / área) - 1.0</p>
-                </div>
-                <div class="card">
-                    <h4>concavity:</h4> <p>Severidade das porções côncavas do contorno</p>
-                </div>
-                <div class="card">
-                    <h4>concave_points:</h4> <p>Número de porções côncavas do contorno</p>
-                </div>
-            </div>
-
-            <div class="highlight-card" style="padding: 1rem; margin: 0.75rem 0;">
-                <h3 style="font-size: 1rem; margin-bottom: 0.75rem;"><i class="fas fa-exclamation-triangle icon"></i>Dificuldades e Desafios do Tema:</h3>
-                <ul style="margin: 0; padding-left: 1.25rem;">
-                    <li style="margin-bottom: 0.25rem; font-size: 1rem;"><strong>Escalas Diferentes:</strong> area (100s-1000s) vs smoothness (0.05-0.16) - Normalização obrigatória</li>
-                    <li style="margin-bottom: 0.25rem; font-size: 1rem;"><strong>Interpretação Médica:</strong> Características morfológicas complexas exigem conhecimento especializado</li>
-                    <li style="margin-bottom: 0.25rem; font-size: 1rem;"><strong>Correlações:</strong> Features relacionadas (radius ↔ perimeter ↔ area) podem confundir o modelo</li>
-                    <li style="margin-bottom: 0.25rem; font-size: 1rem;"><strong>Overfitting:</strong> 30 features para 569 amostras requer regularização cuidadosa</li>
-                    <li style="margin-bottom: 0.25rem; font-size: 1rem;"><strong>Desbalanceamento:</strong> 62.7% benigno vs 37.3% maligno</li>
-                    <li style="margin-bottom: 0; font-size: 1rem;"><strong>Criticidade Médica:</strong> Falsos negativos (perder maligno) são mais graves que falsos positivos</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Slide 2: Tipologia do Problema -->
-        <section class="slide">
-            <h1 style="font-size: 1.75rem; margin-bottom: 1rem;"><i class="fas fa-bullseye icon"></i>Tipologia do Problema</h1>
-            
-            <div class="highlight-card" style="padding: 1rem; margin: 0.75rem 0;">
-                <h3 style="text-align: center; margin-bottom: 1rem; font-size: 1.1rem;"><i class="fas fa-brain icon"></i>Classificação do Problema de Machine Learning</h3>
-                
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin: 1rem 0; align-items: start;">
-                    <!-- Coluna Esquerda: Tipo de Aprendizado e Problema -->
-                    <div style="display: flex; flex-direction: column; gap: 1.25rem;">
-                        <div class="problem-type-card supervised" style="padding: 1.25rem 1rem; min-height: 110px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                            <div class="problem-icon" style="font-size: 1.5rem; margin-bottom: 0.5rem;"><i class="fas fa-brain"></i></div>
-                            <div class="problem-title" style="font-size: 1.1rem; margin-bottom: 0.25rem;">TIPO DE APRENDIZADO</div>
-                            <div class="problem-subtitle" style="font-size: 1.5rem; margin-bottom: 0.5rem;">SUPERVISIONADO</div>
-                            <p style="font-size: 1rem; margin: 0; text-align: center;">Dados rotulados disponíveis</p>
-                        </div>
-                        
-                        <div class="problem-type-card classification" style="padding: 1.25rem 1rem; min-height: 110px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                            <div class="problem-icon" style="font-size: 1.5rem; margin-bottom: 0.5rem;"><i class="fas fa-tags"></i></div>
-                            <div class="problem-title" style="font-size: 1.1rem; margin-bottom: 0.25rem;">TIPO DE PROBLEMA</div>
-                            <div class="problem-subtitle" style="font-size: 1.5rem; margin-bottom: 0.5rem;">CLASSIFICAÇÃO</div>
-                            <p style="font-size: 1rem; margin: 0; text-align: center;">Predição de categorias</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Coluna Direita: Estatísticas -->
-                    <div style="display: flex; flex-direction: column; gap: 1rem; justify-content: space-between; height: 100%;">
-                        <div class="card stat-card" style="padding: 1.25rem; flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 90px;">
-                            <span class="stat-number" style="font-size: 2rem; margin-bottom: 0.5rem;">2</span>
-                            <div class="stat-label" style="font-size: 1.1rem; margin-bottom: 0.25rem;">Classes</div>
-                            <p style="font-size: 1rem; margin: 0; text-align: center;">Saída binária</p>
-                        </div>
-                        
-                        <div class="card stat-card" style="padding: 1.25rem; flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 90px;">
-                            <span class="stat-number" style="font-size: 2rem; margin-bottom: 0.5rem;">569</span>
-                            <div class="stat-label" style="font-size: 1.1rem; margin-bottom: 0.25rem;">Amostras</div>
-                            <p style="font-size: 1rem; margin: 0; text-align: center;">Casos rotulados</p>
-                        </div>
-                        
-                        <div class="card stat-card" style="padding: 1.25rem; flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 90px;">
-                            <span class="stat-number" style="font-size: 2rem; margin-bottom: 0.5rem;">30</span>
-                            <div class="stat-label" style="font-size: 1.1rem; margin-bottom: 0.25rem;">Features</div>
-                            <p style="font-size: 1rem; margin: 0; text-align: center;">Características</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div style="text-align: center; padding: 1.5rem; background: rgba(74, 144, 226, 0.05); border-radius: 16px; margin-top: 1rem;">
-                    <h4 style="color: var(--text-primary); margin-bottom: 0.5rem; font-size: 1rem;"><i class="fas fa-target"></i> OBJETIVO PRINCIPAL</h4>
-                    <h2 style="color: var(--primary); font-size: 1.75rem; font-weight: 700; margin: 0.5rem 0;">BENIGNO vs MALIGNO</h2>
-                    <p style="color: var(--text-secondary); font-size: 1rem; margin: 0;">Distinguir entre tumores benignos e malignos com alta precisão</p>
-                </div>
-            </div>
-
-        </section>
-
-        <!-- Slide 7: Análise Exploratória -->
+        <!-- Slide 5: Análise Exploratória -->
         <section class="slide">
             <h1 style="font-size: 2rem; margin-bottom: 1rem;"><i class="fas fa-chart-bar icon"></i>Análise Exploratória</h1>
             
@@ -823,6 +706,123 @@
                         <li><strong>Regularização:</strong> Pode ajudar com correlações entre features</li>
                     </ul>
                 </div>
+            </div>
+        </section>
+
+        <!-- Slide 2: Tipologia do Problema -->
+        <section class="slide">
+            <h1 style="font-size: 1.75rem; margin-bottom: 1rem;"><i class="fas fa-bullseye icon"></i>Tipologia do Problema</h1>
+            
+            <div class="highlight-card" style="padding: 1rem; margin: 0.75rem 0;">
+                <h3 style="text-align: center; margin-bottom: 1rem; font-size: 1.1rem;"><i class="fas fa-brain icon"></i>Classificação do Problema de Machine Learning</h3>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin: 1rem 0; align-items: start;">
+                    <!-- Coluna Esquerda: Tipo de Aprendizado e Problema -->
+                    <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+                        <div class="problem-type-card supervised" style="padding: 1.25rem 1rem; min-height: 110px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                            <div class="problem-icon" style="font-size: 1.5rem; margin-bottom: 0.5rem;"><i class="fas fa-brain"></i></div>
+                            <div class="problem-title" style="font-size: 1.1rem; margin-bottom: 0.25rem;">TIPO DE APRENDIZADO</div>
+                            <div class="problem-subtitle" style="font-size: 1.5rem; margin-bottom: 0.5rem;">SUPERVISIONADO</div>
+                            <p style="font-size: 1rem; margin: 0; text-align: center;">Dados rotulados disponíveis</p>
+                        </div>
+                        
+                        <div class="problem-type-card classification" style="padding: 1.25rem 1rem; min-height: 110px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                            <div class="problem-icon" style="font-size: 1.5rem; margin-bottom: 0.5rem;"><i class="fas fa-tags"></i></div>
+                            <div class="problem-title" style="font-size: 1.1rem; margin-bottom: 0.25rem;">TIPO DE PROBLEMA</div>
+                            <div class="problem-subtitle" style="font-size: 1.5rem; margin-bottom: 0.5rem;">CLASSIFICAÇÃO</div>
+                            <p style="font-size: 1rem; margin: 0; text-align: center;">Predição de categorias</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Coluna Direita: Estatísticas -->
+                    <div style="display: flex; flex-direction: column; gap: 1rem; justify-content: space-between; height: 100%;">
+                        <div class="card stat-card" style="padding: 1.25rem; flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 90px;">
+                            <span class="stat-number" style="font-size: 2rem; margin-bottom: 0.5rem;">2</span>
+                            <div class="stat-label" style="font-size: 1.1rem; margin-bottom: 0.25rem;">Classes</div>
+                            <p style="font-size: 1rem; margin: 0; text-align: center;">Saída binária</p>
+                        </div>
+                        
+                        <div class="card stat-card" style="padding: 1.25rem; flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 90px;">
+                            <span class="stat-number" style="font-size: 2rem; margin-bottom: 0.5rem;">569</span>
+                            <div class="stat-label" style="font-size: 1.1rem; margin-bottom: 0.25rem;">Amostras</div>
+                            <p style="font-size: 1rem; margin: 0; text-align: center;">Casos rotulados</p>
+                        </div>
+                        
+                        <div class="card stat-card" style="padding: 1.25rem; flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 90px;">
+                            <span class="stat-number" style="font-size: 2rem; margin-bottom: 0.5rem;">30</span>
+                            <div class="stat-label" style="font-size: 1.1rem; margin-bottom: 0.25rem;">Features</div>
+                            <p style="font-size: 1rem; margin: 0; text-align: center;">Características</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; padding: 1.5rem; background: rgba(74, 144, 226, 0.05); border-radius: 16px; margin-top: 1rem;">
+                    <h4 style="color: var(--text-primary); margin-bottom: 0.5rem; font-size: 1rem;"><i class="fas fa-target"></i> OBJETIVO PRINCIPAL</h4>
+                    <h2 style="color: var(--primary); font-size: 1.75rem; font-weight: 700; margin: 0.5rem 0;">BENIGNO vs MALIGNO</h2>
+                    <p style="color: var(--text-secondary); font-size: 1rem; margin: 0;">Distinguir entre tumores benignos e malignos com alta precisão</p>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Slide 7: Features e Dificuldades -->
+        <section class="slide">
+            <h1 style="font-size: 1.75rem; margin-bottom: 1rem;"><i class="fas fa-microscope icon"></i>Features: Complexidade e Desafios</h1>
+            
+            <div class="methodology-card card" style="padding: 1rem; margin: 0.75rem 0;">
+                <h3 style="font-size: 1rem; margin-bottom: 0.75rem;"><i class="fas fa-calculator icon"></i>Estrutura dos Dados: 30 Features Numéricas</h3>
+                <p style="margin-bottom: 0.5rem; font-size: 0.9rem;">Cada feature é calculada em 3 estatísticas:</p>
+                <ul style="margin: 0.5rem 0; padding-left: 1.25rem;">
+                    <li style="margin-bottom: 0.25rem; font-size: 1rem;"><strong>Mean (média):</strong> Valor médio da característica</li>
+                    <li style="margin-bottom: 0.25rem; font-size: 1rem;"><strong>SE (standard error):</strong> Erro padrão da característica</li>
+                    <li style="margin-bottom: 0.25rem; font-size: 1rem;"><strong>Worst (pior valor):</strong> Maior valor (mais extremo) da característica</li>
+                </ul>
+                <p style="margin: 0.5rem 0 0 0; font-size: 1rem;"><strong>Fórmula:</strong> 10 Características Morfológicas × 3 Estatísticas = 30 Features</p>
+            </div>
+
+            <div class="image-container" style="margin: 0.75rem 0; padding: 0.75rem;">
+                <h3 style="font-size: 1rem; margin-bottom: 0.75rem;">🧬 Heatmap de Correlação das Features</h3>
+                <img src="imagens/heatmap.jpeg" alt="Heatmap de Correlação das Features" style="max-width: 700px;">
+            </div>
+
+            <h3 style="font-size: 1.1rem; margin: 1rem 0 0.75rem 0;"><i class="fas fa-dna icon"></i>10 Características Morfológicas Base:</h3>
+            <div class="grid grid-2">
+                <div class="card">
+                    <h4>radius:</h4> <p>Distância média do centro aos pontos do perímetro</p>
+                </div>
+                <div class="card">
+                    <h4>texture:</h4> <p>Desvio padrão dos valores de escala de cinza</p>
+                </div>
+                <div class="card">
+                    <h4>perimeter:</h4> <p>Perímetro do núcleo celular</p>
+                </div>
+                <div class="card">
+                    <h4>area:</h4> <p>Área do núcleo celular</p>
+                </div>
+                <div class="card">
+                    <h4>smoothness:</h4> <p>Variação local nos comprimentos dos raios</p>
+                </div>
+                <div class="card">
+                    <h4>compactness:</h4> <p>(perímetro² / área) - 1.0</p>
+                </div>
+                <div class="card">
+                    <h4>concavity:</h4> <p>Severidade das porções côncavas do contorno</p>
+                </div>
+                <div class="card">
+                    <h4>concave_points:</h4> <p>Número de porções côncavas do contorno</p>
+                </div>
+            </div>
+
+            <div class="highlight-card" style="padding: 1rem; margin: 0.75rem 0;">
+                <h3 style="font-size: 1rem; margin-bottom: 0.75rem;"><i class="fas fa-exclamation-triangle icon"></i>Dificuldades e Desafios do Tema:</h3>
+                <ul style="margin: 0; padding-left: 1.25rem;">
+                    <li style="margin-bottom: 0.25rem; font-size: 1rem;"><strong>Escalas Diferentes:</strong> area (100s-1000s) vs smoothness (0.05-0.16) - Normalização obrigatória</li>
+                    <li style="margin-bottom: 0.25rem; font-size: 1rem;"><strong>Interpretação Médica:</strong> Características morfológicas complexas exigem conhecimento especializado</li>
+                    <li style="margin-bottom: 0.25rem; font-size: 1rem;"><strong>Correlações:</strong> Features relacionadas (radius ↔ perimeter ↔ area) podem confundir o modelo</li>
+                    <li style="margin-bottom: 0.25rem; font-size: 1rem;"><strong>Overfitting:</strong> 30 features para 569 amostras requer regularização cuidadosa</li>
+                    <li style="margin-bottom: 0.25rem; font-size: 1rem;"><strong>Desbalanceamento:</strong> 62.7% benigno vs 37.3% maligno</li>
+                    <li style="margin-bottom: 0; font-size: 1rem;"><strong>Criticidade Médica:</strong> Falsos negativos (perder maligno) são mais graves que falsos positivos</li>
+                </ul>
             </div>
         </section>
 
