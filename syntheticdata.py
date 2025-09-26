@@ -1,8 +1,23 @@
+import kaggle
+from kaggle.api.kaggle_api_extended import KaggleApi
 import pandas as pd
 import numpy as np
+import os
 from sklearn.datasets import make_classification
 from imblearn.over_sampling import SMOTE
 from sklearn.preprocessing import StandardScaler
+
+# Inicializar a API do Kaggle
+api = KaggleApi()
+api.authenticate()
+
+# Criar o diretório se não existir
+data_path = '../data/01-raw'
+data_augmented_path = '../data/augmented'
+os.makedirs(data_path, exist_ok=True)
+os.makedirs(data_augmented_path, exist_ok=True)
+# Baixar os dados do Kaggle
+api.dataset_download_files('wasiqaliyasir/breast-cancer-dataset', path=data_path, unzip=True)
 
 # Load the original dataset
 df = pd.read_csv('../data/01-raw/Breast_cancer_dataset.csv')
