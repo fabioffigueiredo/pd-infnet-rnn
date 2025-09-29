@@ -173,11 +173,10 @@ data/
 *.h5
 *.hdf5
 *.pickle
-*.pkl
 
 # Model files
 *.model
-*.pkl
+
 models/
 checkpoints/
 *.h5
