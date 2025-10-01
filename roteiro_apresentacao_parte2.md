@@ -215,22 +215,11 @@ Camada de Saída: 1 neurônio + Sigmoid
 - **2 camadas**: Balanceio entre capacidade e simplicidade
 - **3+ camadas**: Risco de overfitting com dataset pequeno
 
-**Por que 64 → 32 neurônios?**
-- **Redução gradual**: Permite extração hierárquica de features
-- **64 neurônios**: ~2x o número de features de entrada
-- **32 neurônios**: Compressão intermediária antes da saída
-- **Baseado em heurísticas**: Regras empíricas da literatura
-
 **Por que ReLU?**
 - **Não saturação**: Evita vanishing gradient
 - **Computacionalmente eficiente**: Operação simples
 - **Esparsidade**: Alguns neurônios ficam inativos
 - **Estado da arte**: Padrão atual em deep learning
-
-**Por que Dropout 0.3?**
-- **Regularização**: Previne overfitting
-- **30%**: Balanceio entre regularização e capacidade
-- **Aplicado em treino**: Desabilitado na inferência
 
 **Por que Sigmoid na saída?**
 - **Classificação binária**: Output entre 0 e 1
@@ -271,8 +260,18 @@ Camada de Saída: 1 neurônio + Sigmoid
 - **AUC-ROC**: Avaliação independente do threshold
 
 **Melhor modelo:**
-   Keras optimized (Grid Search): score: 0.9524 recall. Aproximadamente 5% superior ao Baseline
-   
+  **Modelo comparado com a baseline**: Keras optimized (Grid Search): score: 0.9524 recall. Aproximadamente 5% superior ao Baseline
+
+  **Convergência do treinamento e seleção dos hiperparametros**: Conforme o melhor modelo selecionado pela busca em grid Epoch 11: early stopping
+Melhores parâmetros: {'model__dropout_rate': 0.3, 'model__learning_rate': 0.01, 'model__neurons': 7};
+
+A partir da epoch 11 se notou uma estabilização na metrica "val_recall" (selecionada como critério de parada);
+
+O valor de dropout foi de 0.3 (30% dos neuronios desligados a cada iteração);
+
+Taxa de aprendizado de 0.01, o que apresentou um acrescimo equilibrado de aprendizado ao modelo, nao tao alto que atingisse um underfitting ou nao tao baixo que atingisse um overfitting;
+
+A quantidade de neuronios selecionados foi de 7 (2 para a segunda camada), o que se mostrou bastante eficiente;
 
 
 ### 5.4 Estratégia de Validação
