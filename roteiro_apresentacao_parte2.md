@@ -195,9 +195,9 @@ Cada feature é calculada para:
 ```
 Camada de Entrada: 30 neurônios (features)
     ↓
-Camada Oculta 1: ReLU + Dropout(0.3)
+Camada Oculta 1: 7 neuronios (considerando o melhor modelo) + ReLU + Dropout(0.3)
     ↓
-Camada Oculta 2: ReLU + Dropout(0.3)
+Camada Oculta 2: 2 neuronios (considerando o melhor modelo) + ReLU + Dropout(0.3)
     ↓
 Camada de Saída: 1 neurônio + Sigmoid
 ```
@@ -277,6 +277,7 @@ Camada de Saída: 1 neurônio + Sigmoid
 
 ### 5.4 Estratégia de Validação
 
+
 **Validação Cruzada Estratificada (3-fold)**
 - Mantém proporção das classes em cada fold
 - Reduz variância das estimativas
@@ -288,6 +289,11 @@ Camada de Saída: 1 neurônio + Sigmoid
 - Dropout rate: [0.1, 0.2, 0.3]
 - Epochs: 200 com Early stopping e patience
 - Otimizador: Adam
+
+**Figura de mérito obtida**
+- Foi selecionado a métrica Recall pois como se trata de uma classificação binária de detecção de
+  cancer (maligno x benigno) a detecção de um falso positivo é muito mais grave do que um falso negativo (neste caso
+ , por exemnplo, uma pessoa ser diagnosticada com cancer e não ter).
 
 # 6 Deployment
 
