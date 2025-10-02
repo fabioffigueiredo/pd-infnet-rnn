@@ -228,5 +228,9 @@ tmp/
 # *.pptx
 # *.pdf
 
-# Streamlit
-.streamlit/
+# Ignora tudo dentro de .streamlit
+.streamlit/*
+
+# Mas não ignora a pasta data e seu conteúdo
+!.streamlit/data/
+!.streamlit/data/**
