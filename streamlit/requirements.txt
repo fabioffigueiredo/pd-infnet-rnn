@@ -1,0 +1,5 @@
+streamlit>=1.36
+pillow
+numpy
+tensorflow>=2.12
+scikit-learn

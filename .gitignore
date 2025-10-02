@@ -228,5 +228,8 @@ tmp/
 # *.pptx
 # *.pdf
 
-# Streamlit
-.streamlit/
+.streamlit/*
+
+!streamlit/data/
+!streamlit/data/*.csv
+!streamlit/data/*.keras
