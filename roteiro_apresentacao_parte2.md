@@ -1,13 +1,21 @@
-venv# ROTEIRO - PARTE 1 DA APRESENTAÇÃO
-## Projeto de Disciplina de Redes Neurais com TensorFlow
+## Projeto de Disciplina de Deep Learning com TensorFlow
 ### Classificação de Câncer de Mama
 
 ---
 
 ## 1. MEMBROS DO GRUPO
 
-- **Mateus Teixeira Ramos da Silva** - [GitHub](https://github.com/GitMateusTeixeira/03-ml-modeling)
-- [Adicionar outros membros conforme necessário]
+- **Mateus Teixeira Ramos da Silva** - [GitHub](https://github.com/GitMateusTeixeira)
+
+- **Fabio Ferreira Figueiredo** - [GitHub](https://github.com/fabioffigueiredo)
+
+- **Felipe Szczpanski** - [GitHub](https://github.com/szczpanski)
+
+- **Lauro Barbosa** - [GitHub](https://github.com/LMRocha)
+
+- **Thiago Vinícius** - [GitHub](https://github.com/ubyss)
+
+- **Wilson Melo** - [GitHub](https://github.com/bakudas)
 
 ---
 
@@ -195,9 +203,9 @@ Cada feature é calculada para:
 ```
 Camada de Entrada: 30 neurônios (features)
     ↓
-Camada Oculta 1: 7 neuronios (considerando o melhor modelo) + ReLU + Dropout(0.3)
+Camada Oculta 1: [2 a 10] neuronios (considerando o melhor modelo) + ReLU + Dropout(0.3)
     ↓
-Camada Oculta 2: 2 neuronios (considerando o melhor modelo) + ReLU + Dropout(0.3)
+Camada Oculta 2: [2 a 10]/2 neuronios (considerando o melhor modelo) + ReLU + Dropout(0.3)
     ↓
 Camada de Saída: 1 neurônio + Sigmoid
 ```
@@ -297,6 +305,3 @@ A quantidade de neuronios selecionados foi de 7 (2 para a segunda camada), o que
 # 6 Deployment
 
 - Deployment no Streallit modelo salvo no arquivo .PKL
-
-
-**Este roteiro fornece a base sólida para a apresentação da Parte 2, demonstrando compreensão técnica profunda e justificativas bem fundamentadas para cada decisão do projeto.**
